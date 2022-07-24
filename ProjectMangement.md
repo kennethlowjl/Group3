@@ -4,7 +4,11 @@
 
 *Include a paragraph or two, agreed by all team members, on how well the group has worked together, and how well the project is progressing.*
 
+
+
 *Discuss the scrum meetings, and what could make them more efficient (if anything).*
+
+The scrum meetings will be scheduled on a day when it is convienient for everyone. During scrum meetings, we discuss on how we can progress better and how to better manage our work. 
 
 *Highlight any communication issues that might be affecting the project.*
 
