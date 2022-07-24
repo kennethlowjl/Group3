@@ -6,7 +6,14 @@
 
 *List several user stories (no more than 8) that describe the product requirements. For each user story that you include:*
 
+As a Game Generator, generate a 9 grid with (3x3) subsquares so that the game is playable.
+As a Game Generator , generate a set of random numbers between 1-9 across the board depending on the difficulty level.
+As a user, I want to be able to request a random sudoku puzzle so that I can solve it in the app.
+As a Game generator, I want to generate a level that is requested by the user.
+
 * *Include a URL link to the Jira user-story issue.*
+
+
 * *Paste in the Story Description and Story Summary from Jira.  Attempt to keep story summaries in the form taught in the lectures, i.e. the form "As a [persona], I [want to], [so that]".  Feel free to update your Jira issues into this form if they are not already.*
 * *Give details of whether this story has been assigned to someone yet, and whether it is completed yet.*
 * *Include a screenshots of any relevant attachments.*
