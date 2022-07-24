@@ -1,6 +1,7 @@
 # Product Demonstration Report
 
 *This section should contain a brief description and demo of product you have built.*
+Our team has decided to built a Sudoku Game. This game consists of 9X9 grid and 3X3 subgrid with numbers ranging from 1-9, in each row/column there should not be any repeating numbers. 
 
 * *Include screenshots (actual screenshots, not mock ups) of all of the facets of the product working.*
 * *Link consecutive screenshots together with a brief narrative explaining how the product works, e.g. a sentence "Click on OK and it takes you to the next window", "On starting the app, the following window is shown".  This document should not take you a long time to create - it's just pasting photos and adding explanatory sentences between them, so that your MVP is adequately described.*
