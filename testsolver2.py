@@ -103,12 +103,12 @@ if __name__ == '__main__':
 
     while True:
 
-        example_board = generateBoard()
+        question_board = generateBoard()
         input("Press Enter to continue...")
         print("===================================================================\n")
         print("Solution by Solver:")
-        solve_sudoku(example_board)
-        pprint(example_board)
+        solve_sudoku(question_board)
+        pprint(question_board)
         print()
         print(f"Variable 1 = {variable_1}")
         print(f"Variable 2 = {variable_2}")
