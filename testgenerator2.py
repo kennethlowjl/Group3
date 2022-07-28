@@ -1,8 +1,10 @@
 base  = 3
 side  = base*base
 
-
 def generateBoard():
+
+    empties = int(input("Choose your difficulty from 1 - 60: "))
+
     # pattern for a baseline valid solution
     def pattern(r,c): return (base*(r%base)+r//base+c)%side
 
@@ -16,9 +18,12 @@ def generateBoard():
 
     # produce board using randomized baseline pattern
     board = [ [nums[pattern(r,c)] for c in cols] for r in rows ]
-    print("First Board with Answers")
+    print()
+    print("First Board with Answers:")
+    print("----------------------------")
 
     for line in board: print(line)
+    print("----------------------------")
     print()
 
 
@@ -26,18 +31,18 @@ def generateBoard():
     #Creating the puzzle with empty blanks
     new_board = []
     squares = side*side
-    empties = squares * 3//4
+    empties = empties
     for p in sample(range(squares),empties):
         board[p//side][p%side] = 0
 
-    print("First Board with Blanks")
+    print(f"First Board with {empties} Blanks:")
+    print("---------------------------")
     numSize = len(str(side))
     for line in board:
         print(*(f"{n or '.':{numSize}} " for n in line))
         for i in line:
             new_board.append(i)
     # print (new_board)
-    print()
 
 
     #Converting Board with 0s to -1s for solver to read
@@ -57,6 +62,9 @@ def generateBoard():
     # list should have
 
     x = list(divide_chunks(new_board, 9))
+    print("---------------------------")
+    print()
     return x
+
 
 
