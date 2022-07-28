@@ -1,5 +1,6 @@
 from pprint import pprint
 from testgenerator2 import*
+import csv
 
 empty_squares = 0
 variable_1 = 0
@@ -7,6 +8,7 @@ variable_2 = 0
 variable_3 = 0
 variable_4 = 0
 variable_5 = 0
+
 
 def find_next_empty(puzzle):
     # finds the next row, col on the puzzle that's not filled yet --> rep with -1
@@ -32,7 +34,7 @@ def is_valid(puzzle, guess, row, col):
     # let's start with the row
     row_vals = puzzle[row]
     if guess in row_vals:
-        variable_1 +=1
+        variable_1 += 1
         return False  # if we've repeated, then our guess is not valid!
 
     # now the column
@@ -86,15 +88,15 @@ def solve_sudoku(puzzle):
                 empty_squares += 1
                 return True
 
-        # step 5: it not valid or if nothing gets returned true, then we need to backtrack and try a new number
+        # step 5: if not valid or if nothing gets returned true, then we need to backtrack and try a new number
         puzzle[row][col] = -1
         variable_5 += 1
     # step 6: if none of the numbers that we try work, then this puzzle is UNSOLVABLE!!
     return False
 
 
-
 if __name__ == '__main__':
+    from datacollect import write_csv
     with open('readme.txt') as f:
         contents = f.read()
         print(contents)
@@ -103,8 +105,7 @@ if __name__ == '__main__':
 
         example_board = generateBoard()
         input("Press Enter to continue...")
-        print("===================================================================")
-        print()
+        print("===================================================================\n")
         print("Solution by Solver:")
         solve_sudoku(example_board)
         pprint(example_board)
@@ -114,10 +115,17 @@ if __name__ == '__main__':
         print(f"Variable 3 = {variable_3}")
         print(f"Variable 4 = {variable_4}")
         print(f"Variable 5 = {variable_5}")
-        print(f"For {empty_squares} empty Squares")
+        print(f"For {empty_squares} empty Squares\n")
+        with open('statistics.csv', 'r') as csv_file:
+            csv_reader = csv.reader(csv_file)
+
+            with open('statistics.csv', 'a') as f:
+                writer = csv.writer(f, delimiter=',')
+                data = [[empty_squares], [variable_1],[variable_2], [variable_3], [variable_4], [variable_5]]
+                writer.writerow(data)
 
         while True:
-            answer = str(input('Run again? (y/n): '))
+            answer = str(input('Do you want to run the program again? (y/n): '))
             if answer in ('y', 'n'):
                 break
             print("invalid input.")
@@ -131,7 +139,5 @@ if __name__ == '__main__':
             print("\n\n")
             continue
         else:
-            print("Goodbye")
+            print("\nThank you for using our Sudoku Program. Goodbye!")
             break
-
-

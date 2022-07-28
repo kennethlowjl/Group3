@@ -23,9 +23,7 @@ def generateBoard():
     print("----------------------------")
 
     for line in board: print(line)
-    print("----------------------------")
-    print()
-
+    print("----------------------------\n")
 
 
     #Creating the puzzle with empty blanks
@@ -62,8 +60,7 @@ def generateBoard():
     # list should have
 
     x = list(divide_chunks(new_board, 9))
-    print("---------------------------")
-    print()
+    print("---------------------------\n")
     return x
 
 
