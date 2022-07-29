@@ -1,7 +1,7 @@
 from pprint import pprint
 from testgenerator1 import*
 
-steps_taken = 0
+variable_3 = 0
 empty_squares = 0
 
 def find_next_empty(puzzle):
@@ -18,7 +18,7 @@ def find_next_empty(puzzle):
 
 
 def is_valid(puzzle, guess, row, col):
-    global steps_taken
+    global variable_3
     # figures out whether the guess at the row/col of the puzzle is a valid guess
     # returns True or False
 
@@ -101,5 +101,5 @@ if __name__ == '__main__':
     print(solve_sudoku(example_board))
     pprint(example_board)
     print()
-    print(f"Steps taken: {steps_taken}")
+    print(f"Steps taken: {variable_3}")
     print(f"For {empty_squares} empty Squares")
