@@ -4,7 +4,7 @@
 
 *Include a paragraph or two, agreed by all team members, on how well the group has worked together, and how well the project is progressing.*
 
-
+Our team has been working well together and we cater to each others needs. When a problem arises, we aim to settle it immediately. Every team member has their weakness and forte so we delegate the tasks based on who can best perform it instead of splitting it equally as we feel that this method will create a more cohesive and efficient environment. We make sure to get inputs from all team members and ensure that all of us agree before finalizing on any ideas. For example, when we have a few ideas, we list the advantages and disadvantages of each of the ideas and make a decision from there.
 
 *Discuss the scrum meetings, and what could make them more efficient (if anything).*
 
