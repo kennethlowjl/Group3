@@ -6,8 +6,9 @@ empty_squares = 0
 variable_1 = 0
 variable_2 = 0
 variable_3 = 0
-variable_4 = 0
-variable_5 = 0
+valid_num_placed = 0
+num_of_backtrack = 0
+num_of_guess = 0
 
 
 def find_next_empty(puzzle):
@@ -61,7 +62,7 @@ def is_valid(puzzle, guess, row, col):
 
 def solve_sudoku(puzzle):
     global empty_squares
-    global variable_4, variable_5
+    global valid_num_placed, num_of_backtrack, num_of_guess
 
     # solve sudoku using backtracking!
     # our puzzle is a list of lists, where each inner list is a row in our sudoku puzzle
@@ -78,10 +79,11 @@ def solve_sudoku(puzzle):
         # step 2: if there is a place to put a number, then make a guess between 1 and 9
     for guess in range(1, 10):  # range(1, 10) is 1, 2, 3, ... 9
         # step 3: check if this is a valid guess
+        num_of_guess += 1
         if is_valid(puzzle, guess, row, col):
             # step 3.1: if this is a valid guess, then place it at that spot on the puzzle
             puzzle[row][col] = guess
-            variable_4 += 1
+            valid_num_placed += 1
 
             # step 4: then we recursively call our solver!
             if solve_sudoku(puzzle):
@@ -90,38 +92,38 @@ def solve_sudoku(puzzle):
 
         # step 5: if not valid or if nothing gets returned true, then we need to backtrack and try a new number
         puzzle[row][col] = -1
-        variable_5 += 1
+        num_of_backtrack += 1
     # step 6: if none of the numbers that we try work, then this puzzle is UNSOLVABLE!!
     return False
 
 
 if __name__ == '__main__':
-    from datacollect import write_csv
     with open('readme.txt') as f:
         contents = f.read()
         print(contents)
 
     while True:
 
-        example_board = generateBoard()
+        question_board = generateBoard()
         input("Press Enter to continue...")
         print("===================================================================\n")
         print("Solution by Solver:")
-        solve_sudoku(example_board)
-        pprint(example_board)
+        solve_sudoku(question_board)
+        pprint(question_board)
         print()
         print(f"Variable 1 = {variable_1}")
         print(f"Variable 2 = {variable_2}")
         print(f"Variable 3 = {variable_3}")
-        print(f"Variable 4 = {variable_4}")
-        print(f"Variable 5 = {variable_5}")
+        print(f"Valid number placed in cell = {valid_num_placed}")
+        print(f"Number of backtracks = {num_of_backtrack}")
+        print(f"Number of guesses made = {num_of_guess}")
         print(f"For {empty_squares} empty Squares\n")
         with open('statistics.csv', 'r') as csv_file:
             csv_reader = csv.reader(csv_file)
 
             with open('statistics.csv', 'a') as f:
                 writer = csv.writer(f, delimiter=',')
-                data = [[empty_squares], [variable_1],[variable_2], [variable_3], [variable_4], [variable_5]]
+                data = [[empty_squares], [variable_1], [variable_2], [variable_3], [valid_num_placed], [num_of_backtrack], [num_of_guess]]
                 writer.writerow(data)
 
         while True:
@@ -134,8 +136,9 @@ if __name__ == '__main__':
             variable_1 = 0
             variable_2 = 0
             variable_3 = 0
-            variable_4 = 0
-            variable_5 = 0
+            valid_num_placed = 0
+            num_of_backtrack = 0
+            num_of_guess = 0
             print("\n\n")
             continue
         else:

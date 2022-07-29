@@ -2,8 +2,19 @@ base  = 3
 side  = base*base
 
 def generateBoard():
+    empties = 0
+    while True:
+        try:
+            empties = int(input("Choose your difficulty from 1 - 60: "))
 
-    empties = int(input("Choose your difficulty from 1 - 60: "))
+        except ValueError:
+            print("Invalid input")
+            continue
+        if empties in range(1, 61):
+            break
+        print("Invalid input")
+    if empties == range(1,61):
+        return empties
 
     # pattern for a baseline valid solution
     def pattern(r,c): return (base*(r%base)+r//base+c)%side
