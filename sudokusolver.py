@@ -1,5 +1,5 @@
 from pprint import pprint
-from sudokugenerator import*
+from sudokugenerator import *
 import csv
 import time
 
@@ -78,11 +78,17 @@ def solve_puzzle(blank):
 
 
 if __name__ == '__main__':
-    print("Welcome to Group 3's Sudoku Generator and Independent Solver Program. This program aims to generate a set of Sudoku Puzzle to be solved by our Program Solver. It will then generate statistics and write it into a CSV file. Please choose a difficulty from 1 - 60 for the amount of blanks (grid without numbers) you want in the puzzle.")
+    print("================================================================================================"
+          "\nWelcome to Group 3's Sudoku Generator and Independent Solver Program. "
+          "\nThis program aims to generate a set of Sudoku Puzzle to be solved by our Program Solver. "
+          "\nYou choose a difficulty from 1 - 60 for the amount of blanks in the puzzle."
+          "\nThen, you run the solver to solve the puzzle and it will generate various metrics that will be stored "
+          "into a CSV file."
+          "\n================================================================================================\n")
 
     while True:
         question_board = generateBoard()
-        input("Press Enter to continue...")
+        input("---Press Enter to run the Auto Solver---")
         print("===================================================================\n")
         print("Solution by Solver:")
         start = time.time()
@@ -90,12 +96,13 @@ if __name__ == '__main__':
         end = time.time()
         pprint(question_board)
         print()
-        time_taken = round((end - start)*10000000)
+        time_taken = round((end - start) * 10000000)
         print(f"Time taken: {time_taken} ns")
         print(f"Valid number placed in cell = {valid_num_placed}")
         print(f"Number of backtracks = {num_of_backtrack}")
         print(f"Number of guesses made = {num_of_guess}")
-        print(f"For {empty_squares} empty Squares\n")
+        print()
+        print(f"For {empty_squares} empty Squares")
         with open('statistics.csv', 'r') as csv_file:
             csv_reader = csv.reader(csv_file)
 
@@ -104,14 +111,14 @@ if __name__ == '__main__':
                 data = [[empty_squares], [time_taken], [valid_num_placed], [num_of_backtrack], [num_of_guess]]
                 writer.writerow(data)
         if num_of_backtrack > 2400:
-            print("The difficulty is very high. Suggest decreasing the difficulty. ")
+            print("This puzzle's difficulty is very high. Suggest decreasing the difficulty. ")
         elif num_of_backtrack > 890:
-            print("The difficulty is a little high. Suggest decreasing the difficulty. ")
+            print("This puzzle's difficulty is a little high. Suggest decreasing the difficulty. ")
         elif num_of_backtrack > 250:
-            print("The difficulty is a little low. Suggest increasing the difficulty. ")
+            print("This puzzle's  difficulty is a little low. Suggest increasing the difficulty. ")
         else:
-             print("The difficulty is a very low. Suggest increasing the difficulty. ")
-
+            print("This puzzle's  difficulty is a very low. Suggest increasing the difficulty. ")
+        print()
         while True:
             answer = str(input('Do you want to run the program again? (y/n): '))
             if answer in ('y', 'n'):

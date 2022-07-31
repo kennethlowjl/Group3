@@ -6,7 +6,7 @@ def generateBoard():
     empties = 0
     while True:
         try:
-            empties = int(input("Choose your difficulty from 1 - 60: "))
+            empties = int(input("Firstly, choose your difficulty from 1 - 60: "))
 
         except ValueError:
             print("Invalid input")
@@ -28,7 +28,7 @@ def generateBoard():
 
     board = [ [nums[pattern(r,c)] for c in cols] for r in rows ]
     print()
-    print("First Board with Answers:")
+    print("Sudoku Board with Answers:")
     print("----------------------------")
 
     for line in board: print(line)
@@ -40,7 +40,7 @@ def generateBoard():
     for p in sample(range(squares),empties):
         board[p//side][p%side] = 0
 
-    print(f"First Board with {empties} Blanks:")
+    print(f"Sudoku Board with {empties} Blanks:")
     print("---------------------------")
 
     numSize = len(str(side))
