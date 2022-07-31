@@ -9,85 +9,71 @@ num_of_backtrack = 0
 num_of_guess = 0
 
 
-def find_next_empty(puzzle):
-    # finds the next row, col on the puzzle that's not filled yet --> rep with -1
-    # return row, col tuple (or (None, None) if there is none)
+def find_next_blank(blank):
+    # finds the next row, col on the puzzle that's not filled
+    # return row, col  if there is none
 
-    # keep in mind that we are using 0-8 for our indices
     for r in range(9):
-        for c in range(9):  # range(9) is 0, 1, 2, ... 8
-            if puzzle[r][c] == -1:
+        for c in range(9):
+            if blank[r][c] == -1:
                 return r, c
 
-    return None, None  # if no spaces in the puzzle are empty (-1)
+    return None, None
 
 
-def is_valid(puzzle, guess, row, col):
-    # figures out whether the guess at the row/col of the puzzle is a valid guess
-    # returns True or False
+def is_valid(blank, guess, row, col):
+    # finds out whether the guess at the row/col of the puzzle is a valid guess
 
-    # for a guess to be valid, then we need to follow the sudoku rules
-    # that number must not be repeated in the row, column, or 3x3 square that it appears in
-
-    # let's start with the row
-    row_vals = puzzle[row]
+    row_vals = blank[row]
     if guess in row_vals:
-        return False  # if we've repeated, then our guess is not valid!
+        return False
 
-    # now the column
-    # col_vals = []
-    # for i in range(9):
-    #     col_vals.append(puzzle[i][col])
-    col_vals = [puzzle[i][col] for i in range(9)]
+    col_vals = [blank[i][col] for i in range(9)]
     if guess in col_vals:
         return False
 
-    # and then the square
-    row_start = (row // 3) * 3  # 10 // 3 = 3, 5 // 3 = 1, 1 // 3 = 0
+    row_start = (row // 3) * 3
     col_start = (col // 3) * 3
 
     for r in range(row_start, row_start + 3):
         for c in range(col_start, col_start + 3):
-            if puzzle[r][c] == guess:
+            if blank[r][c] == guess:
                 return False
 
     return True
 
 
-def solve_sudoku(puzzle):
+def solve_puzzle(blank):
     global empty_squares
     global valid_num_placed, num_of_backtrack, num_of_guess
 
-    # solve sudoku using backtracking!
-    # our puzzle is a list of lists, where each inner list is a row in our sudoku puzzle
-    # return whether a solution exists
-    # mutates puzzle to be the solution (if solution exists)
+    # solve sudoku using backtracking technique
 
-    # step 1: choose somewhere on the puzzle to make a guess
-    row, col = find_next_empty(puzzle)
+    # step 1: choose a blank on the puzzle and make a guess
+    row, col = find_next_blank(blank)
 
-    # step 1.1: if there's nowhere left, then we're done because we only allowed valid inputs
-    if row is None:  # this is true if our find_next_empty function returns None, None
+    # If there's no empty blank left, returns True
+    if row is None:
         return True
 
-        # step 2: if there is a place to put a number, then make a guess between 1 and 9
-    for guess in range(1, 10):  # range(1, 10) is 1, 2, 3, ... 9
-        # step 3: check if this is a valid guess
+        # step 2: If found blank, then make a guess between 1 and 9
+    for guess in range(1, 10):
+        # step 3: check if it is a valid guess
         num_of_guess += 1
-        if is_valid(puzzle, guess, row, col):
-            # step 3.1: if this is a valid guess, then place it at that spot on the puzzle
-            puzzle[row][col] = guess
+        if is_valid(blank, guess, row, col):
+            # step 3.1: if this is a valid guess, then place number into the list
+            blank[row][col] = guess
             valid_num_placed += 1
 
-            # step 4: then we recursively call our solver!
-            if solve_sudoku(puzzle):
+            # step 4: recursively calls the solver
+            if solve_puzzle(blank):
                 empty_squares += 1
                 return True
 
-        # step 5: if not valid or if nothing gets returned true, then we need to backtrack and try a new number
-        puzzle[row][col] = -1
+        # step 5: if not valid or not True, then backtrack and try a new number
+        blank[row][col] = -1
         num_of_backtrack += 1
-    # step 6: if none of the numbers that we try work, then this puzzle is UNSOLVABLE!!
+    # step 6: if none of the numbers work, puzzle is unsolvable - returns False
     return False
 
 
@@ -100,7 +86,7 @@ if __name__ == '__main__':
         print("===================================================================\n")
         print("Solution by Solver:")
         start = time.time()
-        solve_sudoku(question_board)
+        solve_puzzle(question_board)
         end = time.time()
         pprint(question_board)
         print()
