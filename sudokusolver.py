@@ -78,14 +78,11 @@ def solve_puzzle(blank):
 
 
 if __name__ == '__main__':
-    print("================================================================================================"
-          "\nWelcome to Group 3's Sudoku Generator and Independent Solver Program. "
-          "\nThis program aims to generate a set of Sudoku Puzzle to be solved by our Program Solver. "
-          "\nYou choose a difficulty from 1 - 60 for the amount of blanks in the puzzle."
-          "\nThen, you run the solver to solve the puzzle and it will generate various metrics that will be stored "
-          "into a CSV file."
-          "\n================================================================================================\n")
 
+    with open('introduction.txt') as f:
+        contents = f.read()
+        print(contents)
+        print()
     while True:
         question_board = generateBoard()
         input("---Press Enter to run the Auto Solver---")
