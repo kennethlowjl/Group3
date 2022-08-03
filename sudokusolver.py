@@ -97,12 +97,6 @@ if __name__ == '__main__':
         pprint(question_board)
         print()
         time_taken = round((end - start) * 10000000)
-        print(f"Time taken: {time_taken} ns")
-        print(f"Valid number placed in cell = {valid_num_placed}")
-        print(f"Number of backtracks = {num_of_backtrack}")
-        print(f"Number of guesses made = {num_of_guess}")
-        print()
-        print(f"For {empty_squares} empty Squares")
         with open('statistics.csv', 'r') as csv_file:
             csv_reader = csv.reader(csv_file)
 
