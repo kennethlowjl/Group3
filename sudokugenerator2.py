@@ -83,7 +83,7 @@ def solve_puzzle(blank):
 
 def generateBoard2(empties):
     global num_of_backtrack
-    #     # empties = 0
+        # empties = 0
     #     # while True:
     #     try:
     #         empties = int(input("Choose your difficulty from 1 - 60: "))
@@ -181,5 +181,6 @@ def generateBoard2(empties):
         for i in line:
             continue
     print(f"Number of backtracks = {num_of_backtrack}")
-    print(x)
+    return(x)
 
+generateBoard2(30)
