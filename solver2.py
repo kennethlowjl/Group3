@@ -1,5 +1,6 @@
 from pprint import pprint
 from sudokugenerator import *
+# from sudokugenerator2 import*
 import csv
 import time
 
@@ -126,12 +127,40 @@ if __name__ == '__main__':
                 break
             print("invalid input.")
         if answer == 'y':
-            empty_squares = 0
-            valid_num_placed = 0
-            num_of_backtrack = 0
-            num_of_guess = 0
-            print("\n\n")
-            continue
+            # empty_squares = 0
+            # valid_num_placed = 0
+            # num_of_backtrack = 0
+            # num_of_guess = 0
+            while True:
+                answer_2 = str(input('Do you want the same number of blanks? (y/n): '))
+                if answer_2 in ('y', 'n'):
+                    break
+                print("invalid input.")
+            if answer_2 == 'y':
+                while True:
+                    answer_3 = str(input('Do you want your puzzle to be (a)Easier or (b)Harder?'))
+                    if answer_3 in ('a', 'b'):
+                        break
+                if answer_3 == 'a':
+                    backtrack_stats = (num_of_backtrack/1.5)
+                    print("EASY")
+#START OF EASY PUZZLE GENERATOR
+
+
+                elif answer_3 =='b':
+                    backtrack_stats = str(round(num_of_backtrack*1.5))
+                    print("HARD")
+#START OF HARD PUZZLE GENERATOR
+
+                print("invalid input.")
+
+            elif answer_2 == 'n':
+                empty_squares = 0
+                valid_num_placed = 0
+                num_of_backtrack = 0
+                num_of_guess = 0
+                print("\n\n")
+                continue
         else:
             print("\nThank you for using our Sudoku Program. Goodbye!")
             break
