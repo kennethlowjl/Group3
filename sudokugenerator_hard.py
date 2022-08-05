@@ -5,6 +5,7 @@ from pprint import pprint
 import sudokusolver
 import sudokugenerator
 import pickle
+import sudokugenerator_easy
 
 # empties = 0
 num_of_backtrack_1 = 0
@@ -207,15 +208,24 @@ def generateBoard_hard():
     pickle.dump(int(num_of_backtrack_1), outfile_1)
     outfile_1.close()
 
-    while True:
-        answer = str(input('Run the puzzle at Harder Difficulty Setting again? (y/n): '))
-        if answer in ('y', 'n'):
-            break
-        print("invalid input.")
-    if answer == 'y':
+
+    answer3 = str(input('Do you want to run it (a)Easier / (b)Harder / (c)To Pass'))
+    if answer3 == 'a':
+        sudokugenerator_easy.generateBoard_easy()
+    elif answer3 == 'b':
         generateBoard_hard()
     else:
         return x
+
+    # while True:
+    #     answer = str(input('Run the puzzle at Harder Difficulty Setting again? (y/n): '))
+    #     if answer in ('y', 'n'):
+    #         break
+    #     print("invalid input.")
+    # if answer == 'y':
+    #     generateBoard_hard()
+    # else:
+    #     return x
 
 
 
