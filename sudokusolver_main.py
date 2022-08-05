@@ -1,3 +1,12 @@
+from sudokugenerator import *
+import sudokugenerator_easy
+import sudokugenerator_hard
+from pprint import pprint
+import csv
+import time
+import pickle
+
+
 empty_squares = 0
 valid_num_placed = 0
 num_of_backtrack = 0
