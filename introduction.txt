@@ -7,7 +7,7 @@ The solver will solve the puzzle and  generate various metrics to be stored into
 After the Solver gives a difficulty rating, you can choose an Easier or Harder puzzle to be generated.
 The Solver will then feed the data into the Generator to produce a different set of Puzzle based on your choice.
 
-The Difficulty Setting based on Statistics are as follows:
+The Difficulty Recommendations are as follows:
 EASY: 1 - 300
 MEDIUM: 300 - 1500
 HARD: 1500 - 3000
