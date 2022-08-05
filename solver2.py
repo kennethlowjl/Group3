@@ -4,7 +4,7 @@ from sudokugenerator import *
 import csv
 import time
 
-import sudokugenerator2
+import sudokugenerator_hard
 
 empty_squares = 0
 valid_num_placed = 0
@@ -160,7 +160,7 @@ if __name__ == '__main__':
 
                     print("EASY")
 #START OF EASY PUZZLE GENERATOR
-                    sudokugenerator2.generateBoard2()
+                    sudokugenerator2.generateBoard_hard()
 
                 elif answer_3 =='b':
                     backtrack_num = int(num_of_backtrack*1.5)

@@ -1,6 +1,6 @@
 from pprint import pprint
 from sudokugenerator import *
-from sudokugenerator2 import generateBoard2
+from sudokugenerator_hard import generateBoard_hard
 import csv
 import time
 import time
@@ -138,7 +138,7 @@ if __name__ == '__main__':
 
 
         for i in range(20):
-            question_board = generateBoard2(60)
+            question_board = generateBoard_hard(60)
             start = time.time()
             solve_puzzle(question_board)
             end = time.time()

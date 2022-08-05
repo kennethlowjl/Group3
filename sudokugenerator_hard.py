@@ -2,13 +2,16 @@
 # side  = base*base
 # from solver2 import*
 from pprint import pprint
+import sudokusolver
+import sudokugenerator
+import pickle
 
-empty_squares = 0
+# empties = 0
 num_of_backtrack_1 = 0
 
 
 
-def generateBoard2():
+def generateBoard_hard():
 
     def find_next_blank_1(blank):
         # finds the next row, col on the puzzle that's not filled
@@ -43,7 +46,7 @@ def generateBoard2():
         return True
 
     def solve_puzzle_1(blank):
-        global empty_squares, num_of_backtrack_1
+        global num_of_backtrack_1
 
         # solve sudoku using backtracking technique
 
@@ -63,7 +66,7 @@ def generateBoard2():
 
                 # step 4: recursively calls the solver
                 if solve_puzzle_1(blank):
-                    empty_squares += 1
+                    # empty_squares += 1
                     return True
 
             # step 5: if not valid or not True, then backtrack and try a new number
@@ -74,23 +77,28 @@ def generateBoard2():
 
 
     global num_of_backtrack_1
-    empties = 0
+    # empties = 0
+    # while True:
+    #     try:
+    #         empties = int(input("Choose your difficulty from 1 - 60: "))
+    #
+    #     except ValueError:
+    #         print("Invalid input")
+    #         continue
+    #     if empties in range(1, 61):
+    #         break
+    #     print("Invalid input")
+    # if empties == range(1,61):
+    #     # return empties
+    #     empties = empties
+
+
     while True:
-        try:
-            empties = int(input("Choose your difficulty from 1 - 60: "))
-
-        except ValueError:
-            print("Invalid input")
-            continue
-        if empties in range(1, 61):
-            break
-        print("Invalid input")
-    if empties == range(1,61):
-        # return empties
-        empties = empties
-
-
-    while True:
+        import sudokusolver
+        infile = open('empties.txt', 'rb')
+        empties = int(pickle.load(infile))
+        infile.close
+        print(empties)
 
         def pattern(r,c): return (3*(r%3)+r//3+c)%9
 
@@ -138,10 +146,17 @@ def generateBoard2():
 
 
         solve_puzzle_1(x)
-        print(f"Run = {num_of_backtrack_1}")
-        if num_of_backtrack_1 <50000:
-            num_of_backtrack_1 = 0
 
+
+        infile_1 = open('backtrack_num.txt', 'rb')
+        backtrack_stat = int(pickle.load(infile_1))
+        infile_1.close
+        print(f"Original difficulty: {backtrack_stat}")
+        backtrack_stat = backtrack_stat*1.5
+
+        print(f"Run = {num_of_backtrack_1}")
+        if num_of_backtrack_1 < backtrack_stat+500:                   #I WANT MORE DIFFICULT FUNCTION
+            num_of_backtrack_1 = 0
             continue
         else:
             break
@@ -186,5 +201,22 @@ def generateBoard2():
         x = list(divide_chunks_1(new_board, 9))
 
     print(f"Puzzle with {num_of_backtrack_1} of backtracks")
-    # print(x)
-    return x
+
+
+    outfile_1 = open('backtrack_num.txt', 'wb')
+    pickle.dump(int(num_of_backtrack_1), outfile_1)
+    outfile_1.close()
+
+    while True:
+        answer = str(input('Run the puzzle at Harder Difficulty Setting again? (y/n): '))
+        if answer in ('y', 'n'):
+            break
+        print("invalid input.")
+    if answer == 'y':
+        generateBoard_hard()
+    else:
+        return x
+
+
+
+

@@ -1,9 +1,11 @@
 from pprint import pprint
+
+import sudokugenerator_easy
 from sudokugenerator import *
 import csv
 import time
-
-from sudokugenerator2 import generateBoard2
+import pickle
+import sudokugenerator_hard
 
 empty_squares = 0
 valid_num_placed = 0
@@ -136,15 +138,24 @@ if __name__ == '__main__':
             print("This puzzle's  difficulty is a very low. Suggest increasing the difficulty. ")
         print()
 
-        answer2 = str(input('Do you want to run it (a) Easier or (b) Harder (c) To Pass'))
+        answer2 = str(input('Do you want to run it (a)Easier / (b)Harder / (c)To Pass'))
         if answer2 =='a':
 
-            generateBoard2()
+            outfile = open('empties.txt', 'wb')
+            pickle.dump(int(empty_squares), outfile)
+            outfile.close()
+
+            sudokugenerator_easy.generateBoard_easy()
+            print("\n")
 
         elif answer2 =='b':
 
-            pass
+            outfile = open('empties.txt', 'wb')
+            pickle.dump(int(empty_squares), outfile)
+            outfile.close()
 
+            sudokugenerator_hard.generateBoard_hard()
+            print("\n")
 
         elif answer2 == 'c':
             break
