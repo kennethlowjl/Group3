@@ -6,7 +6,7 @@ def generateBoard():
     empties = 0
     while True:
         try:
-            empties = int(input("Firstly, choose your difficulty from 1 - 60: "))
+            empties = int(input("Firstly, choose the number of blanks from 1 - 60: "))
 
         except ValueError:
             print("Invalid input")
@@ -60,6 +60,7 @@ def generateBoard():
 
     x = list(divide_chunks(new_board, 9))
     print("---------------------------\n")
+    # print(x)
     return x
 
 

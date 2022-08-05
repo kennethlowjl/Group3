@@ -1,11 +1,10 @@
-from sudokugenerator import *
-import sudokugenerator_easy
-import sudokugenerator_hard
 from pprint import pprint
+from sudokugenerator import *
+# from sudokugenerator2 import*
 import csv
 import time
-import pickle
 
+import sudokugenerator_hard
 
 empty_squares = 0
 valid_num_placed = 0
@@ -83,6 +82,13 @@ def solve_puzzle(blank):
     return False
 
 
+def return_empty_squares():
+    empties = empty_squares
+    return empties
+
+
+def return_backtrack_stats():
+    return backtrack_num
 
 
 if __name__ == '__main__':
@@ -94,7 +100,7 @@ if __name__ == '__main__':
     while True:
         question_board = generateBoard()
         input("---Press Enter to run the Auto Solver---")
-        print("===================================================================")
+        print("===================================================================\n")
         print("Solution by Solver:")
         start = time.time()
         solve_puzzle(question_board)
@@ -106,9 +112,8 @@ if __name__ == '__main__':
         print(f"Valid number placed in cell = {valid_num_placed}")
         print(f"Number of backtracks = {num_of_backtrack}")
         print(f"Number of guesses made = {num_of_guess}")
-        print("===================================================================\n")
-        print(f"For {empty_squares} empty Blanks in the puzzle")
-        print(f"The Difficulty Level of this Puzzle is {num_of_backtrack}")
+        print()
+        print(f"For {empty_squares} empty Squares")
         with open('statistics.csv', 'r') as csv_file:
             csv_reader = csv.reader(csv_file)
 
@@ -117,51 +122,60 @@ if __name__ == '__main__':
                 data = [[empty_squares], [time_taken], [valid_num_placed], [num_of_backtrack], [num_of_guess]]
                 writer.writerow(data)
         if num_of_backtrack > 2400:
-            print("Difficulty is very High. Suggest decreasing the difficulty. ")
+            print("This puzzle's difficulty is very high. Suggest decreasing the difficulty. ")
         elif num_of_backtrack > 890:
-            print("Difficulty isSlightly High. Suggest decreasing the difficulty. ")
+            print("This puzzle's difficulty is a little high. Suggest decreasing the difficulty. ")
         elif num_of_backtrack > 250:
-            print("Difficulty is Slightly Low. Suggest increasing the difficulty. ")
+            print("This puzzle's  difficulty is a little low. Suggest increasing the difficulty. ")
         else:
-            print("Difficulty is Very Low. Suggest increasing the difficulty. ")
+            print("This puzzle's  difficulty is a very low. Suggest increasing the difficulty. ")
         print()
 
-        answer2 = str(input(f'Do you want to run the puzzle with {empty_squares} Blanks in (a)Easier / (b)Harder Setting or (c)To Pass: \n'))
-        if answer2 =='a':
-
-            outfile = open('empties.txt', 'wb')
-            pickle.dump(int(empty_squares), outfile)
-            outfile.close()
-
-            sudokugenerator_easy.generateBoard_easy()
-            print("\n")
-
-        elif answer2 =='b':
-
-            outfile = open('empties.txt', 'wb')
-            pickle.dump(int(empty_squares), outfile)
-            outfile.close()
-
-            sudokugenerator_hard.generateBoard_hard()
-            print("\n")
-
-        elif answer2 == 'c':
-            break
-
+        print(return_empty_squares())
 
         while True:
-            print("=====================================================================")
-            answer = str(input('Do you want to RERUN the entire PROGRAM again? (y/n): '))
+            answer = str(input('Do you want to run the program again? (y/n): '))
             if answer in ('y', 'n'):
                 break
             print("invalid input.")
         if answer == 'y':
-            empty_squares = 0
-            valid_num_placed = 0
-            num_of_backtrack = 0
-            num_of_guess = 0
-            print("\n\n")
-            continue
+            # empty_squares = 0
+            # valid_num_placed = 0
+            # num_of_backtrack = 0
+            # num_of_guess = 0
+            while True:
+                answer_2 = str(input('Do you want the same number of blanks? (y/n): '))
+                if answer_2 in ('y', 'n'):
+                    break
+                print("invalid input.")
+            if answer_2 == 'y':
+                while True:
+                    answer_3 = str(input('Do you want your puzzle to be (a)Easier or (b)Harder?'))
+                    if answer_3 in ('a', 'b'):
+                        break
+                if answer_3 == 'a':
+                    backtrack_num = int((num_of_backtrack/1.5))
+
+                    print (return_backtrack_stats())
+
+                    print("EASY")
+#START OF EASY PUZZLE GENERATOR
+                    sudokugenerator2.generateBoard_hard()
+
+                elif answer_3 =='b':
+                    backtrack_num = int(num_of_backtrack*1.5)
+                    print("HARD")
+#START OF HARD PUZZLE GENERATOR
+
+                print("invalid input.")
+
+            elif answer_2 == 'n':
+                empty_squares = 0
+                valid_num_placed = 0
+                num_of_backtrack = 0
+                num_of_guess = 0
+                print("\n\n")
+                continue
         else:
             print("\nThank you for using our Sudoku Program. Goodbye!")
             break
