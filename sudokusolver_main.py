@@ -171,7 +171,7 @@ if __name__ == '__main__':
             print("\n\n")
             continue
         else:
-            print("\nThank you for using our Sudoku Program. Goodbye!")
+            print("\nThank you for using our Sudoku Program. Have a nice day!")
             break
 
 
