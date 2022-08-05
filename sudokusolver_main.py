@@ -118,11 +118,11 @@ if __name__ == '__main__':
                 data = [[empty_squares], [time_taken], [valid_num_placed], [num_of_backtrack], [num_of_guess]]
                 writer.writerow(data)
 
-        if num_of_backtrack > 2400:
+        if num_of_backtrack > 3000:
             print(f"The Difficulty Level of {num_of_backtrack} is very High. Suggest decreasing the difficulty. ")
-        elif num_of_backtrack > 890:
+        elif num_of_backtrack > 1500:
             print(f"The Difficulty Level of {num_of_backtrack} slightly High. Suggest decreasing the difficulty. ")
-        elif num_of_backtrack > 250:
+        elif num_of_backtrack > 300:
             print(f"The Difficulty Level of {num_of_backtrack} slightly Low. Suggest increasing the difficulty. ")
         else:
             print(f"The Difficulty Level of {num_of_backtrack} very Low. Suggest increasing the difficulty. ")
