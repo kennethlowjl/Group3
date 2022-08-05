@@ -138,7 +138,7 @@ if __name__ == '__main__':
             outfile_1 = open('backtrack_num.txt', 'wb')
             pickle.dump(int(num_of_backtrack), outfile_1)
             outfile_1.close()
-
+            print("===================================================================")
             sudokugenerator_easy.generateBoard_easy()
 
         elif answer2 =='b':
@@ -150,7 +150,7 @@ if __name__ == '__main__':
             outfile_1 = open('backtrack_num.txt', 'wb')
             pickle.dump(int(num_of_backtrack), outfile_1)
             outfile_1.close()
-
+            print("===================================================================")
             sudokugenerator_hard.generateBoard_hard()
 
         elif answer2 == 'c':

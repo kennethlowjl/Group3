@@ -66,7 +66,7 @@ def generateBoard_easy():
         return False
 
     global num_of_backtrack_1
-    print()
+
     while True:
         infile = open('empties.txt', 'rb')
         empties = int(pickle.load(infile))
@@ -166,8 +166,10 @@ def generateBoard_easy():
 
     answer3 = str(input('Enter (a)Easier / (b)Harder to Generate a different set of Puzzle or any key to Pass: \n'))
     if answer3 == 'a':
+        print("===================================================================")
         generateBoard_easy()
     elif answer3 == 'b':
+        print("===================================================================")
         sudokugenerator_hard.generateBoard_hard()
     else:
         return x

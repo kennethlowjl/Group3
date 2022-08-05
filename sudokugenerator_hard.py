@@ -168,8 +168,10 @@ def generateBoard_hard():
 
     answer3 = str(input('Enter (a)Easier / (b)Harder to Generate a different set of Puzzle or any key to Pass: \n'))
     if answer3 == 'a':
+        print("===================================================================")
         sudokugenerator_easy.generateBoard_easy()
     elif answer3 == 'b':
+        print("===================================================================")
         generateBoard_hard()
     else:
         return x
