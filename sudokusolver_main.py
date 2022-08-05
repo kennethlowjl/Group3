@@ -1,7 +1,11 @@
-from pprint import pprint
 from sudokugenerator import *
+import sudokugenerator_easy
+import sudokugenerator_hard
+from pprint import pprint
 import csv
 import time
+import pickle
+
 
 empty_squares = 0
 valid_num_placed = 0
@@ -60,6 +64,7 @@ def solve_puzzle(blank):
     for guess in range(1, 10):
         # step 3: check if it is a valid guess
         num_of_guess += 1
+
         if is_valid(blank, guess, row, col):
             # step 3.1: if this is a valid guess, then place number into the list
             blank[row][col] = guess
@@ -73,23 +78,24 @@ def solve_puzzle(blank):
         # step 5: if not valid or not True, then backtrack and try a new number
         blank[row][col] = -1
         num_of_backtrack += 1
+
     # step 6: if none of the numbers work, puzzle is unsolvable - returns False
     return False
 
 
-if __name__ == '__main__':
-    print("================================================================================================"
-          "\nWelcome to Group 3's Sudoku Generator and Independent Solver Program. "
-          "\nThis program aims to generate a set of Sudoku Puzzle to be solved by our Program Solver. "
-          "\nYou choose a difficulty from 1 - 60 for the amount of blanks in the puzzle."
-          "\nThen, you run the solver to solve the puzzle and it will generate various metrics that will be stored "
-          "into a CSV file."
-          "\n================================================================================================\n")
 
+
+if __name__ == '__main__':
+
+    with open('introduction.txt') as f:
+        contents = f.read()
+        print(contents)
+        print()
     while True:
         question_board = generateBoard()
         input("---Press Enter to run the Auto Solver---")
-        print("===================================================================\n")
+        print()
+        print("===================================================================")
         print("Solution by Solver:")
         start = time.time()
         solve_puzzle(question_board)
@@ -102,7 +108,8 @@ if __name__ == '__main__':
         print(f"Number of backtracks = {num_of_backtrack}")
         print(f"Number of guesses made = {num_of_guess}")
         print()
-        print(f"For {empty_squares} empty Squares")
+        print(f"For {empty_squares} empty Blanks in the puzzle")
+
         with open('statistics.csv', 'r') as csv_file:
             csv_reader = csv.reader(csv_file)
 
@@ -110,17 +117,49 @@ if __name__ == '__main__':
                 writer = csv.writer(f, delimiter=',')
                 data = [[empty_squares], [time_taken], [valid_num_placed], [num_of_backtrack], [num_of_guess]]
                 writer.writerow(data)
-        if num_of_backtrack > 2400:
-            print("This puzzle's difficulty is very high. Suggest decreasing the difficulty. ")
-        elif num_of_backtrack > 890:
-            print("This puzzle's difficulty is a little high. Suggest decreasing the difficulty. ")
-        elif num_of_backtrack > 250:
-            print("This puzzle's  difficulty is a little low. Suggest increasing the difficulty. ")
+
+        if num_of_backtrack > 3000:
+            print(f"The Difficulty Level of {num_of_backtrack} is very High. Suggest decreasing the difficulty. ")
+        elif num_of_backtrack > 1500:
+            print(f"The Difficulty Level of {num_of_backtrack} slightly High. Suggest decreasing the difficulty. ")
+        elif num_of_backtrack > 300:
+            print(f"The Difficulty Level of {num_of_backtrack} slightly Low. Suggest increasing the difficulty. ")
         else:
-            print("This puzzle's  difficulty is a very low. Suggest increasing the difficulty. ")
-        print()
+            print(f"The Difficulty Level of {num_of_backtrack} very Low. Suggest increasing the difficulty. ")
+        print("===================================================================\n")
+
+        answer2 = str(input('Enter (a)Easier / (b)Harder to Generate a different set of Puzzle or any key to Pass: \n'))
+        if answer2 =='a':
+
+            outfile = open('empties.txt', 'wb')
+            pickle.dump(int(empty_squares), outfile)
+            outfile.close()
+
+            outfile_1 = open('backtrack_num.txt', 'wb')
+            pickle.dump(int(num_of_backtrack), outfile_1)
+            outfile_1.close()
+            print("===================================================================")
+            sudokugenerator_easy.generateBoard_easy()
+
+        elif answer2 =='b':
+
+            outfile = open('empties.txt', 'wb')
+            pickle.dump(int(empty_squares), outfile)
+            outfile.close()
+
+            outfile_1 = open('backtrack_num.txt', 'wb')
+            pickle.dump(int(num_of_backtrack), outfile_1)
+            outfile_1.close()
+            print("===================================================================")
+            sudokugenerator_hard.generateBoard_hard()
+
+        elif answer2 == 'c':
+            break
+
+
         while True:
-            answer = str(input('Do you want to run the program again? (y/n): '))
+            print("=====================================================================")
+            answer = str(input('Do you want to RERUN the entire PROGRAM again? (y/n): '))
             if answer in ('y', 'n'):
                 break
             print("invalid input.")
@@ -132,5 +171,7 @@ if __name__ == '__main__':
             print("\n\n")
             continue
         else:
-            print("\nThank you for using our Sudoku Program. Goodbye!")
+            print("\nThank you for using our Sudoku Program. Have a nice day!")
             break
+
+
