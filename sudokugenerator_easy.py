@@ -155,7 +155,7 @@ def generateBoard_easy():
     print("=====================================================================")
     print("GENERATING AN EASIER PUZZLE")
     print(f"Number of Blanks: {empties}")
-    print(f"Original difficulty: {backtrack_stat}")
+    print(f"Original Difficulty: {backtrack_stat}")
     print(f"New Difficulty: {num_of_backtrack_1}")
     print("=====================================================================\n")
 

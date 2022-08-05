@@ -121,11 +121,11 @@ if __name__ == '__main__':
         if num_of_backtrack > 3000:
             print(f"The Difficulty Level of {num_of_backtrack} is very High. Suggest decreasing the difficulty. ")
         elif num_of_backtrack > 1500:
-            print(f"The Difficulty Level of {num_of_backtrack} slightly High. Suggest decreasing the difficulty. ")
+            print(f"The Difficulty Level of {num_of_backtrack} is slightly High. Suggest decreasing the difficulty. ")
         elif num_of_backtrack > 300:
-            print(f"The Difficulty Level of {num_of_backtrack} slightly Low. Suggest increasing the difficulty. ")
+            print(f"The Difficulty Level of {num_of_backtrack} is slightly Low. Suggest increasing the difficulty. ")
         else:
-            print(f"The Difficulty Level of {num_of_backtrack} very Low. Suggest increasing the difficulty. ")
+            print(f"The Difficulty Level of {num_of_backtrack} is very Low. Suggest increasing the difficulty. ")
         print("===================================================================\n")
 
         answer2 = str(input('Enter (a)Easier / (b)Harder to Generate a different set of Puzzle or any key to Pass: \n'))
