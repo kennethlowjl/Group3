@@ -94,6 +94,7 @@ if __name__ == '__main__':
     while True:
         question_board = generateBoard()
         input("---Press Enter to run the Auto Solver---")
+        print()
         print("===================================================================")
         print("Solution by Solver:")
         start = time.time()
@@ -106,9 +107,9 @@ if __name__ == '__main__':
         print(f"Valid number placed in cell = {valid_num_placed}")
         print(f"Number of backtracks = {num_of_backtrack}")
         print(f"Number of guesses made = {num_of_guess}")
-        print("===================================================================\n")
+        print()
         print(f"For {empty_squares} empty Blanks in the puzzle")
-        print(f"The Difficulty Level of this Puzzle is {num_of_backtrack}")
+
         with open('statistics.csv', 'r') as csv_file:
             csv_reader = csv.reader(csv_file)
 
@@ -116,25 +117,29 @@ if __name__ == '__main__':
                 writer = csv.writer(f, delimiter=',')
                 data = [[empty_squares], [time_taken], [valid_num_placed], [num_of_backtrack], [num_of_guess]]
                 writer.writerow(data)
-        if num_of_backtrack > 2400:
-            print("Difficulty is very High. Suggest decreasing the difficulty. ")
-        elif num_of_backtrack > 890:
-            print("Difficulty isSlightly High. Suggest decreasing the difficulty. ")
-        elif num_of_backtrack > 250:
-            print("Difficulty is Slightly Low. Suggest increasing the difficulty. ")
-        else:
-            print("Difficulty is Very Low. Suggest increasing the difficulty. ")
-        print()
 
-        answer2 = str(input(f'Do you want to run the puzzle with {empty_squares} Blanks in (a)Easier / (b)Harder Setting or (c)To Pass: \n'))
+        if num_of_backtrack > 2400:
+            print(f"The Difficulty Level of {num_of_backtrack} is very High. Suggest decreasing the difficulty. ")
+        elif num_of_backtrack > 890:
+            print(f"The Difficulty Level of {num_of_backtrack} slightly High. Suggest decreasing the difficulty. ")
+        elif num_of_backtrack > 250:
+            print(f"The Difficulty Level of {num_of_backtrack} slightly Low. Suggest increasing the difficulty. ")
+        else:
+            print(f"The Difficulty Level of {num_of_backtrack} very Low. Suggest increasing the difficulty. ")
+        print("===================================================================\n")
+
+        answer2 = str(input('Enter (a)Easier / (b)Harder to Generate a different set of Puzzle or any key to Pass: \n'))
         if answer2 =='a':
 
             outfile = open('empties.txt', 'wb')
             pickle.dump(int(empty_squares), outfile)
             outfile.close()
 
+            outfile_1 = open('backtrack_num.txt', 'wb')
+            pickle.dump(int(num_of_backtrack), outfile_1)
+            outfile_1.close()
+
             sudokugenerator_easy.generateBoard_easy()
-            print("\n")
 
         elif answer2 =='b':
 
@@ -142,8 +147,11 @@ if __name__ == '__main__':
             pickle.dump(int(empty_squares), outfile)
             outfile.close()
 
+            outfile_1 = open('backtrack_num.txt', 'wb')
+            pickle.dump(int(num_of_backtrack), outfile_1)
+            outfile_1.close()
+
             sudokugenerator_hard.generateBoard_hard()
-            print("\n")
 
         elif answer2 == 'c':
             break
