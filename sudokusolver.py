@@ -3,7 +3,7 @@ from sudokugenerator import *
 import csv
 import time
 
-
+from sudokugenerator2 import generateBoard2
 
 empty_squares = 0
 valid_num_placed = 0
@@ -81,6 +81,21 @@ def solve_puzzle(blank):
     return False
 
 
+
+def return_empty_squares():
+    empties = empty_squares
+    return empties
+
+
+def return_backtrack_stats():
+    return num_of_backtrack
+
+
+
+
+
+
+
 if __name__ == '__main__':
 
     with open('introduction.txt') as f:
@@ -120,6 +135,21 @@ if __name__ == '__main__':
         else:
             print("This puzzle's  difficulty is a very low. Suggest increasing the difficulty. ")
         print()
+
+        answer2 = str(input('Do you want to run it (a) Easier or (b) Harder (c) To Pass'))
+        if answer2 =='a':
+
+            generateBoard2()
+
+        elif answer2 =='b':
+
+            pass
+
+
+        elif answer2 == 'c':
+            break
+
+
         while True:
             answer = str(input('Do you want to run the program again? (y/n): '))
             if answer in ('y', 'n'):

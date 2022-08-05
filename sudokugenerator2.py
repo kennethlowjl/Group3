@@ -3,100 +3,91 @@
 # from solver2 import*
 from pprint import pprint
 
-
 empty_squares = 0
-valid_num_placed = 0
-num_of_backtrack = 0
-num_of_guess = 0
+num_of_backtrack_1 = 0
 
 
-def find_next_blank(blank):
-    # finds the next row, col on the puzzle that's not filled
-    # return row, col  if there is none
 
-    for r in range(9):
-        for c in range(9):
-            if blank[r][c] == -1:
-                return r, c
+def generateBoard2():
 
-    return None, None
+    def find_next_blank_1(blank):
+        # finds the next row, col on the puzzle that's not filled
+        # return row, col  if there is none
 
+        for r in range(9):
+            for c in range(9):
+                if blank[r][c] == -1:
+                    return r, c
 
-def is_valid(blank, guess, row, col):
-    # finds out whether the guess at the row/col of the puzzle is a valid guess
+        return None, None
 
-    row_vals = blank[row]
-    if guess in row_vals:
-        return False
+    def is_valid_1(blank, guess, row, col):
+        # finds out whether the guess at the row/col of the puzzle is a valid guess
 
-    col_vals = [blank[i][col] for i in range(9)]
-    if guess in col_vals:
-        return False
+        row_vals = blank[row]
+        if guess in row_vals:
+            return False
 
-    row_start = (row // 3) * 3
-    col_start = (col // 3) * 3
+        col_vals = [blank[i][col] for i in range(9)]
+        if guess in col_vals:
+            return False
 
-    for r in range(row_start, row_start + 3):
-        for c in range(col_start, col_start + 3):
-            if blank[r][c] == guess:
-                return False
+        row_start = (row // 3) * 3
+        col_start = (col // 3) * 3
 
-    return True
+        for r in range(row_start, row_start + 3):
+            for c in range(col_start, col_start + 3):
+                if blank[r][c] == guess:
+                    return False
 
-
-def solve_puzzle(blank):
-    global empty_squares
-    global valid_num_placed, num_of_backtrack, num_of_guess
-
-    # solve sudoku using backtracking technique
-
-    # step 1: choose a blank on the puzzle and make a guess
-    row, col = find_next_blank(blank)
-
-    # If there's no empty blank left, returns True
-    if row is None:
         return True
 
-        # step 2: If found blank, then make a guess between 1 and 9
-    for guess in range(1, 10):
-        # step 3: check if it is a valid guess
-        num_of_guess += 1
-        if is_valid(blank, guess, row, col):
-            # step 3.1: if this is a valid guess, then place number into the list
-            blank[row][col] = guess
-            valid_num_placed += 1
+    def solve_puzzle_1(blank):
+        global empty_squares, num_of_backtrack_1
 
-            # step 4: recursively calls the solver
-            if solve_puzzle(blank):
-                empty_squares += 1
-                return True
+        # solve sudoku using backtracking technique
 
-        # step 5: if not valid or not True, then backtrack and try a new number
-        blank[row][col] = -1
-        num_of_backtrack += 1
-    # step 6: if none of the numbers work, puzzle is unsolvable - returns False
-    return False
+        # step 1: choose a blank on the puzzle and make a guess
+        row, col = find_next_blank_1(blank)
+
+        # If there's no empty blank left, returns True
+        if row is None:
+            return True
+
+            # step 2: If found blank, then make a guess between 1 and 9
+        for guess in range(1, 10):
+            # step 3: check if it is a valid guess
+            if is_valid_1(blank, guess, row, col):
+                # step 3.1: if this is a valid guess, then place number into the list
+                blank[row][col] = guess
+
+                # step 4: recursively calls the solver
+                if solve_puzzle_1(blank):
+                    empty_squares += 1
+                    return True
+
+            # step 5: if not valid or not True, then backtrack and try a new number
+            blank[row][col] = -1
+            num_of_backtrack_1 += 1
+        # step 6: if none of the numbers work, puzzle is unsolvable - returns False
+        return False
 
 
+    global num_of_backtrack_1
+    empties = 0
+    while True:
+        try:
+            empties = int(input("Choose your difficulty from 1 - 60: "))
 
-
-
-def generateBoard2(empties):
-    global num_of_backtrack
-        # empties = 0
-    #     # while True:
-    #     try:
-    #         empties = int(input("Choose your difficulty from 1 - 60: "))
-    #
-    #     except ValueError:
-    #         print("Invalid input")
-    #         continue
-    #     if empties in range(1, 61):
-    #         break
-    #     print("Invalid input")
-    # if empties == range(1,61):
-    #     # return empties
-    #     empties = empties
+        except ValueError:
+            print("Invalid input")
+            continue
+        if empties in range(1, 61):
+            break
+        print("Invalid input")
+    if empties == range(1,61):
+        # return empties
+        empties = empties
 
 
     while True:
@@ -115,7 +106,7 @@ def generateBoard2(empties):
         with open('puzzle.txt', 'w') as f:
             for line in board: f.write(f"{line}\n")
             # for line in board: print(line)
-        print("----------------------------\n")
+        # print("----------------------------\n")
 
 
         new_board = []
@@ -136,19 +127,21 @@ def generateBoard2(empties):
             if new_board[i] == 0:
                 new_board[i] = -1
 
-        def divide_chunks(l, n):
+        def divide_chunks_1(l, n):
             # looping till length l
             for i in range(0, len(l), n):
                 yield l[i:i + n]
 
-        x = list(divide_chunks(new_board, 9))
+        x = list(divide_chunks_1(new_board, 9))
 
         # return x
 
-        solve_puzzle(x)
-        print(f"Number of backtracks = {num_of_backtrack}")
-        if num_of_backtrack >5000:
-            num_of_backtrack = 0
+
+        solve_puzzle_1(x)
+        print(f"Run = {num_of_backtrack_1}")
+        if num_of_backtrack_1 <50000:
+            num_of_backtrack_1 = 0
+
             continue
         else:
             break
@@ -179,8 +172,19 @@ def generateBoard2(empties):
     for line in board:
         print(*(f"{n or '.':{numSize}} " for n in line))
         for i in line:
-            continue
-    print(f"Number of backtracks = {num_of_backtrack}")
-    return(x)
+            new_board.append(i)
 
-generateBoard2(30)
+        for i in range(len(new_board)):
+            if new_board[i] == 0:
+                new_board[i] = -1
+
+        def divide_chunks_1(l, n):
+            # looping till length l
+            for i in range(0, len(l), n):
+                yield l[i:i + n]
+
+        x = list(divide_chunks_1(new_board, 9))
+
+    print(f"Puzzle with {num_of_backtrack_1} of backtracks")
+    # print(x)
+    return x

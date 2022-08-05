@@ -4,7 +4,7 @@ from sudokugenerator import *
 import csv
 import time
 
-
+import sudokugenerator2
 
 empty_squares = 0
 valid_num_placed = 0
@@ -82,6 +82,15 @@ def solve_puzzle(blank):
     return False
 
 
+def return_empty_squares():
+    empties = empty_squares
+    return empties
+
+
+def return_backtrack_stats():
+    return backtrack_num
+
+
 if __name__ == '__main__':
 
     with open('introduction.txt') as f:
@@ -121,6 +130,9 @@ if __name__ == '__main__':
         else:
             print("This puzzle's  difficulty is a very low. Suggest increasing the difficulty. ")
         print()
+
+        print(return_empty_squares())
+
         while True:
             answer = str(input('Do you want to run the program again? (y/n): '))
             if answer in ('y', 'n'):
@@ -142,13 +154,16 @@ if __name__ == '__main__':
                     if answer_3 in ('a', 'b'):
                         break
                 if answer_3 == 'a':
-                    backtrack_stats = (num_of_backtrack/1.5)
+                    backtrack_num = int((num_of_backtrack/1.5))
+
+                    print (return_backtrack_stats())
+
                     print("EASY")
 #START OF EASY PUZZLE GENERATOR
-
+                    sudokugenerator2.generateBoard2()
 
                 elif answer_3 =='b':
-                    backtrack_stats = str(round(num_of_backtrack*1.5))
+                    backtrack_num = int(num_of_backtrack*1.5)
                     print("HARD")
 #START OF HARD PUZZLE GENERATOR
 
