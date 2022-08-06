@@ -172,7 +172,7 @@ def generateBoard_custom():
 
                 print("---------------------------\n")
                 print("=====================================================================")
-                print("GENERATING AN EASIER PUZZLE")
+                print("GENERATING A PUZZLE")
                 print(f"Number of Blanks: {empties}")
                 print(f"Original Difficulty: {backtrack_stat}")
                 print(f"New Difficulty: {num_of_backtrack_1}")
@@ -195,9 +195,9 @@ def generateBoard_custom():
                 outfile_1.close()
                 break
         else:
-            print("\n=================================================================================================")
+            print("\n==================================================================================================")
             print("Puzzle could not be found for this difficulty setting. Suggest choosing another difficulty setting.")
-            print("===================================================================================================\n")
+            print("==================================================================================================\n")
             break
 
     while True:
