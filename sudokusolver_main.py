@@ -131,7 +131,7 @@ if __name__ == '__main__':
 
         while True:
             answer2 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
-                                '(a)Easier set of Puzzle\n(b)Harder set of Puzzle\n(c)Choose a Custom Difficulty'
+                                '(a)Easier Set of Puzzle\n(b)Harder Set of Puzzle\n(c)Choose a Custom Difficulty'
                                 '\n(d)Pass\nEnter your choice: '))
             if answer2 in ('a', 'b', 'c', 'd'):
                 break

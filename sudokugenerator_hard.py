@@ -169,7 +169,7 @@ def generateBoard_hard():
                 break
         else:
             print("===================================================================================================")
-            print("Puzzle could not be found for this difficulty setting. Suggest choosing another difficulty setting.")
+            print("Puzzle could not be found at a harder difficulty setting. Suggest choosing another difficulty setting.")
             print("===================================================================================================\n")
             break
 
