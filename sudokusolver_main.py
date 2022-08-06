@@ -1,6 +1,7 @@
 from sudokugenerator import *
 import sudokugenerator_easy
 import sudokugenerator_hard
+import sudokugenerator_custom
 from pprint import pprint
 import csv
 import time
@@ -128,7 +129,13 @@ if __name__ == '__main__':
             print(f"The Difficulty Level of {num_of_backtrack} is very Low. Suggest increasing the difficulty. ")
         print("===================================================================\n")
 
-        answer2 = str(input('Enter (a)Easier / (b)Harder to Generate a different set of Puzzle or any key to Pass: \n'))
+        while True:
+            answer2 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
+                                '(a)Easier set of Puzzle\n(b)Harder set of Puzzle\n(c)Choose a Custom Difficulty'
+                                '\n(d)Pass\nEnter your choice: '))
+            if answer2 in ('a', 'b', 'c', 'd'):
+                break
+            print("invalid input.\n")
         if answer2 =='a':
 
             outfile = open('empties.txt', 'wb')
@@ -141,7 +148,7 @@ if __name__ == '__main__':
             print("===================================================================")
             sudokugenerator_easy.generateBoard_easy()
 
-        elif answer2 =='b':
+        elif answer2=='b':
 
             outfile = open('empties.txt', 'wb')
             pickle.dump(int(empty_squares), outfile)
@@ -154,8 +161,33 @@ if __name__ == '__main__':
             sudokugenerator_hard.generateBoard_hard()
 
         elif answer2 == 'c':
-            break
+            outfile = open('empties.txt', 'wb')
+            pickle.dump(int(empty_squares), outfile)
+            outfile.close()
 
+            outfile_1 = open('backtrack_num.txt', 'wb')
+            pickle.dump(int(num_of_backtrack), outfile_1)
+            outfile_1.close()
+            print("===================================================================")
+            sudokugenerator_custom.generateBoard_custom()
+
+        elif answer2 =='d':
+            while True:
+                print("=====================================================================")
+                answer = str(input('Do you want to RERUN the entire PROGRAM again? (y/n): '))
+                if answer in ('y', 'n'):
+                    break
+                print("invalid input.")
+            if answer == 'y':
+                empty_squares = 0
+                valid_num_placed = 0
+                num_of_backtrack = 0
+                num_of_guess = 0
+                print("\n\n")
+                continue
+            else:
+                print("\nThank you for using our Sudoku Program. Have a nice day!")
+                break
 
         while True:
             print("=====================================================================")

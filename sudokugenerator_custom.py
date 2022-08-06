@@ -1,12 +1,12 @@
+import sudokugenerator_easy
 import sudokugenerator_hard
-import sudokugenerator_custom
 import pickle
 import time
 
 num_of_backtrack_1 = 0
 
 
-def generateBoard_easy():
+def generateBoard_custom():
 
     def find_next_blank_1(blank):
         # finds the next row, col on the puzzle that's not filled
@@ -69,8 +69,13 @@ def generateBoard_easy():
 
     global num_of_backtrack_1
 
+    infile_1 = open('backtrack_num.txt', 'rb')
+    backtrack_stat = int(pickle.load(infile_1))
+    infile_1.close
+    backtrack_custom = int(input(f"Choose your difficulty level (Original Difficulty:{backtrack_stat}): "))
+    print("Generating..")
+
     timeout = time.time() + 5
-    print("Generating..\n")
 
     while True:
         if time.time() < timeout:
@@ -120,14 +125,14 @@ def generateBoard_easy():
             infile_1 = open('backtrack_num.txt', 'rb')
             backtrack_stat = int(pickle.load(infile_1))
             infile_1.close
-            # print(f"Original difficulty: {backtrack_stat}")
-            backtrack_stat_final = int(backtrack_stat/1.3)
-
+            # print(f"Original difficulty: {backtrack_custom}")
             # print(f"Run = {num_of_backtrack_1}")
-            if num_of_backtrack_1 > backtrack_stat_final:                   #I WANT EASIER FUNCTION
+            if num_of_backtrack_1 > int(backtrack_custom * 1.25) or num_of_backtrack_1 < int(backtrack_custom*0.75):
+                # if num_of_backtrack_1 < backtrack_custom / 2:                   #I WANT CUSTOM TO BE 50% APART
                 num_of_backtrack_1 = 0
                 continue
             else:
+                print()
                 print("Sudoku Board with Answers:")
                 print("----------------------------")
                 with open('puzzle.txt') as f:
@@ -167,10 +172,11 @@ def generateBoard_easy():
                 outfile_1.close()
                 break
         else:
-            print("===================================================================================================")
+            print("\n=================================================================================================")
             print("Puzzle could not be found for this difficulty setting. Suggest choosing another difficulty setting.")
             print("===================================================================================================\n")
             break
+
 
     while True:
         answer3 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
@@ -181,15 +187,14 @@ def generateBoard_easy():
         print("invalid input.\n")
     if answer3 == 'a':
         print("===================================================================")
-        generateBoard_easy()
+        sudokugenerator_easy.generateBoard_easy()
     elif answer3 == 'b':
         print("===================================================================")
         sudokugenerator_hard.generateBoard_hard()
     elif answer3 == 'c':
         print("===================================================================")
-        sudokugenerator_custom.generateBoard_custom()
+        generateBoard_custom()
     elif answer3 == 'd':
         return x
-
 
 
