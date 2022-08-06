@@ -1,6 +1,6 @@
+import sudokugenerator_easy
 import sudokugenerator_medium
 import sudokugenerator_hard
-import sudokugenerator_veryhard
 import sudokugenerator_custom
 import pickle
 import time
@@ -8,8 +8,7 @@ import time
 num_of_backtrack_1 = 0
 
 
-def generateBoard_easy():
-
+def generateBoard_veryhard():
     def find_next_blank_1(blank):
         # finds the next row, col on the puzzle that's not filled
         # return row, col  if there is none
@@ -80,24 +79,27 @@ def generateBoard_easy():
             empties = int(pickle.load(infile))
             infile.close
 
-            def pattern(r,c): return (3*(r%3)+r//3+c)%9
+            def pattern(r, c):
+                return (3 * (r % 3) + r // 3 + c) % 9
 
             from random import sample
-            def shuffle(s): return sample(s,len(s))
-            rBase = range(3)
-            rows  = [ g*3 + r for g in shuffle(rBase) for r in shuffle(rBase) ]
-            cols  = [ g*3 + c for g in shuffle(rBase) for c in shuffle(rBase) ]
-            nums  = shuffle(range(1,3*3+1))
+            def shuffle(s):
+                return sample(s, len(s))
 
-            board = [ [nums[pattern(r,c)] for c in cols] for r in rows ]
+            rBase = range(3)
+            rows = [g * 3 + r for g in shuffle(rBase) for r in shuffle(rBase)]
+            cols = [g * 3 + c for g in shuffle(rBase) for c in shuffle(rBase)]
+            nums = shuffle(range(1, 3 * 3 + 1))
+
+            board = [[nums[pattern(r, c)] for c in cols] for r in rows]
 
             with open('puzzle.txt', 'w') as f:
                 for line in board: f.write(f"{line}\n")
 
             new_board = []
-            squares = 9*9
+            squares = 9 * 9
             empties = empties
-            for p in sample(range(squares),empties):
+            for p in sample(range(squares), empties):
                 board[p // 9][p % 9] = 0
 
             numSize = len(str(9))
@@ -124,8 +126,9 @@ def generateBoard_easy():
             infile_1.close
             # print(f"Original difficulty: {backtrack_stat}")
 
+
             # print(f"Run = {num_of_backtrack_1}")
-            if num_of_backtrack_1 > 301:                                          #I WANT EASY PUZZLE
+            if num_of_backtrack_1 < 4001:                                        #I WANT VERY HARD PUZZLE
                 num_of_backtrack_1 = 0
                 continue
             else:
@@ -157,7 +160,7 @@ def generateBoard_easy():
 
                 print("---------------------------\n")
                 print("=====================================================================")
-                print("GENERATING AN EASY PUZZLE")
+                print("GENERATING A VERY HARD PUZZLE")
                 print(f"Number of Blanks: {empties}")
                 print(f"Original Difficulty: {backtrack_stat}")
                 print(f"New Difficulty: {num_of_backtrack_1}")
@@ -168,9 +171,9 @@ def generateBoard_easy():
                 outfile_1.close()
                 break
         else:
-            print("=====================================================================================================")
-            print("Puzzle could not be found at an EASY setting. Suggest choosing another difficulty setting.")
-            print("=====================================================================================================\n")
+            print("=========================================================================================================")
+            print("Puzzle could not be found at a VERY HARD setting. Suggest choosing another difficulty setting.")
+            print("=========================================================================================================\n")
             break
 
     while True:
@@ -183,7 +186,7 @@ def generateBoard_easy():
         print("invalid input.\n")
     if answer3 == 'a':
         print("===================================================================")
-        generateBoard_easy()
+        sudokugenerator_easy.generateBoard_easy()
     elif answer3 == 'b':
         print("===================================================================")
         sudokugenerator_medium.generateBoard_medium()
@@ -192,12 +195,9 @@ def generateBoard_easy():
         sudokugenerator_hard.generateBoard_hard()
     elif answer3 == 'd':
         print("===================================================================")
-        sudokugenerator_veryhard.generateBoard_veryhard()
+        generateBoard_veryhard()
     elif answer3 == 'e':
         print("===================================================================")
         sudokugenerator_custom.generateBoard_custom()
     elif answer3 == 'f':
         return x
-
-
-

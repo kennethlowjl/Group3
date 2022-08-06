@@ -1,5 +1,7 @@
 import sudokugenerator_easy
+import sudokugenerator_medium
 import sudokugenerator_hard
+import sudokugenerator_veryhard
 import pickle
 import time
 
@@ -72,7 +74,16 @@ def generateBoard_custom():
     infile_1 = open('backtrack_num.txt', 'rb')
     backtrack_stat = int(pickle.load(infile_1))
     infile_1.close
-    backtrack_custom = int(input(f"Choose your difficulty level (Original Difficulty:{backtrack_stat}): "))
+
+    while True:
+        try:
+            backtrack_custom = int(input(f"Choose your difficulty level (Original Difficulty:{backtrack_stat}): "))
+
+        except ValueError:
+            print("Invalid input")
+            continue
+        else:
+            break
     print("Generating..")
 
     timeout = time.time() + 8
@@ -165,6 +176,18 @@ def generateBoard_custom():
                 print(f"Number of Blanks: {empties}")
                 print(f"Original Difficulty: {backtrack_stat}")
                 print(f"New Difficulty: {num_of_backtrack_1}")
+                if num_of_backtrack_1 > 4001:
+                    print(
+                        f"The Difficulty Level of {num_of_backtrack_1} is very High. Suggest decreasing the difficulty. ")
+                elif num_of_backtrack_1 > 2001:
+                    print(
+                        f"The Difficulty Level of {num_of_backtrack_1} is slightly High. Suggest decreasing the difficulty. ")
+                elif num_of_backtrack_1 > 301:
+                    print(
+                        f"The Difficulty Level of {num_of_backtrack_1} is slightly Low. Suggest increasing the difficulty. ")
+                else:
+                    print(
+                        f"The Difficulty Level of {num_of_backtrack_1} is very Low. Suggest increasing the difficulty. ")
                 print("=====================================================================\n")
 
                 outfile_1 = open('backtrack_num.txt', 'wb')
@@ -177,12 +200,12 @@ def generateBoard_custom():
             print("===================================================================================================\n")
             break
 
-
     while True:
-        answer3 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
-                            '(a)Easier set of Puzzle\n(b)Harder set of Puzzle\n(c)Choose a Custom Difficulty'
-                            '\n(d)Pass\nEnter your choice: '))
-        if answer3 in ('a', 'b', 'c', 'd'):
+        answer3 = str(input('Choose your next step(a, b, c, d, e, f):\n---------------------------\n'
+                            '(a)Puzzle with Easy Difficulty\n(b)Puzzle with Medium Difficulty\n(c)Puzzle with Hard '
+                            'Difficulty\n(d)Puzzle with Very Hard Difficulty\n(e)Choose a Custom Difficulty'
+                            '\n(f)Pass\nEnter your choice: '))
+        if answer3 in ('a', 'b', 'c', 'd','e', 'f'):
             break
         print("invalid input.\n")
     if answer3 == 'a':
@@ -190,11 +213,17 @@ def generateBoard_custom():
         sudokugenerator_easy.generateBoard_easy()
     elif answer3 == 'b':
         print("===================================================================")
-        sudokugenerator_hard.generateBoard_hard()
+        sudokugenerator_medium.generateBoard_medium()
     elif answer3 == 'c':
         print("===================================================================")
-        generateBoard_custom()
+        sudokugenerator_hard.generateBoard_hard()
     elif answer3 == 'd':
+        print("===================================================================")
+        sudokugenerator_veryhard.generateBoard_veryhard()
+    elif answer3 == 'e':
+        print("===================================================================")
+        generateBoard_custom()
+    elif answer3 == 'f':
         return x
 
 

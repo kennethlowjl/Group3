@@ -1,6 +1,8 @@
 from sudokugenerator import *
 import sudokugenerator_easy
+import sudokugenerator_medium
 import sudokugenerator_hard
+import sudokugenerator_veryhard
 import sudokugenerator_custom
 from pprint import pprint
 import csv
@@ -120,20 +122,20 @@ if __name__ == '__main__':
                 writer.writerow(data)
 
         if num_of_backtrack > 4001:
-            print(f"The Difficulty Level of {num_of_backtrack} is very High. Suggest decreasing the difficulty. ")
+            print(f"The Difficulty Level of {num_of_backtrack} is very Hard. Suggest decreasing the difficulty. ")
         elif num_of_backtrack > 2001:
-            print(f"The Difficulty Level of {num_of_backtrack} is slightly High. Suggest decreasing the difficulty. ")
+            print(f"The Difficulty Level of {num_of_backtrack} is Hard. Suggest decreasing the difficulty. ")
         elif num_of_backtrack > 301:
-            print(f"The Difficulty Level of {num_of_backtrack} is slightly Low. Suggest increasing the difficulty. ")
+            print(f"The Difficulty Level of {num_of_backtrack} is of Medium difficulty. Suggest increasing the difficulty. ")
         else:
-            print(f"The Difficulty Level of {num_of_backtrack} is very Low. Suggest increasing the difficulty. ")
+            print(f"The Difficulty Level of {num_of_backtrack} is Easy. Suggest increasing the difficulty. ")
         print("===================================================================\n")
 
         while True:
-            answer2 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
-                                '(a)Easier Set of Puzzle\n(b)Harder Set of Puzzle\n(c)Choose a Custom Difficulty'
-                                '\n(d)Pass\nEnter your choice: '))
-            if answer2 in ('a', 'b', 'c', 'd'):
+            answer2 = str(input('Choose your next step(a, b, c, d, e, f):\n---------------------------\n'
+                                '(a)Puzzle with Easy Difficulty\n(b)Puzzle with Medium Difficulty\n(c)Puzzle with Hard '
+                                'Difficulty\n(d)Puzzle with Very Hard Difficulty\n(e)Choose a Custom Difficulty\n(f)Pass\nEnter your choice: '))
+            if answer2 in ('a', 'b', 'c', 'd','e', 'f'):
                 break
             print("invalid input.\n")
         if answer2 =='a':
@@ -158,7 +160,7 @@ if __name__ == '__main__':
             pickle.dump(int(num_of_backtrack), outfile_1)
             outfile_1.close()
             print("===================================================================")
-            sudokugenerator_hard.generateBoard_hard()
+            sudokugenerator_medium.generateBoard_medium()
 
         elif answer2 == 'c':
             outfile = open('empties.txt', 'wb')
@@ -169,9 +171,31 @@ if __name__ == '__main__':
             pickle.dump(int(num_of_backtrack), outfile_1)
             outfile_1.close()
             print("===================================================================")
+            sudokugenerator_hard.generateBoard_hard()
+
+        elif answer2 == 'd':
+            outfile = open('empties.txt', 'wb')
+            pickle.dump(int(empty_squares), outfile)
+            outfile.close()
+
+            outfile_1 = open('backtrack_num.txt', 'wb')
+            pickle.dump(int(num_of_backtrack), outfile_1)
+            outfile_1.close()
+            print("===================================================================")
+            sudokugenerator_veryhard.generateBoard_veryhard()
+
+        elif answer2 == 'e':
+            outfile = open('empties.txt', 'wb')
+            pickle.dump(int(empty_squares), outfile)
+            outfile.close()
+
+            outfile_1 = open('backtrack_num.txt', 'wb')
+            pickle.dump(int(num_of_backtrack), outfile_1)
+            outfile_1.close()
+            print("===================================================================")
             sudokugenerator_custom.generateBoard_custom()
 
-        elif answer2 =='d':
+        elif answer2 =='f':
             while True:
                 print("=====================================================================")
                 answer = str(input('Do you want to RERUN the entire PROGRAM again? (y/n): '))
