@@ -195,7 +195,7 @@ def generateBoard_custom():
                 outfile_1.close()
                 break
         else:
-            print("\n=================================================================================================")
+            print("\n==================================================================================================")
             print("Puzzle could not be found for this difficulty setting. Suggest choosing another difficulty setting.")
             print("==================================================================================================\n")
             break
