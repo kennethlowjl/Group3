@@ -125,7 +125,7 @@ def generateBoard_hard():
             backtrack_stat_final = int(backtrack_stat*1.5)
 
             # print(f"Run = {num_of_backtrack_1}")
-            if num_of_backtrack_1 < backtrack_stat_final:                   #I WANT MORE DIFFICULT FUNCTION
+            if num_of_backtrack_1 < backtrack_stat_final or num_of_backtrack_1 > int(backtrack_stat*2):                   #I WANT MORE DIFFICULT FUNCTION
                 num_of_backtrack_1 = 0
                 continue
             else:
@@ -161,6 +161,18 @@ def generateBoard_hard():
                 print(f"Number of Blanks: {empties}")
                 print(f"Original Difficulty: {backtrack_stat}")
                 print(f"New Difficulty: {num_of_backtrack_1}")
+                if num_of_backtrack_1 > 4001:
+                    print(
+                        f"The Difficulty Level of {num_of_backtrack_1} is very High. Suggest decreasing the difficulty. ")
+                elif num_of_backtrack_1 > 2001:
+                    print(
+                        f"The Difficulty Level of {num_of_backtrack_1} is slightly High. Suggest decreasing the difficulty. ")
+                elif num_of_backtrack_1 > 301:
+                    print(
+                        f"The Difficulty Level of {num_of_backtrack_1} is slightly Low. Suggest increasing the difficulty. ")
+                else:
+                    print(
+                        f"The Difficulty Level of {num_of_backtrack_1} is very Low. Suggest increasing the difficulty. ")
                 print("=====================================================================\n")
 
                 outfile_1 = open('backtrack_num.txt', 'wb')
