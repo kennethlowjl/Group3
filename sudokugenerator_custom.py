@@ -1,5 +1,7 @@
 import sudokugenerator_easy
+import sudokugenerator_medium
 import sudokugenerator_hard
+import sudokugenerator_veryhard
 import pickle
 import time
 
@@ -189,12 +191,12 @@ def generateBoard_custom():
             print("===================================================================================================\n")
             break
 
-
     while True:
-        answer3 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
-                            '(a)Easier set of Puzzle\n(b)Harder set of Puzzle\n(c)Choose a Custom Difficulty'
-                            '\n(d)Pass\nEnter your choice: '))
-        if answer3 in ('a', 'b', 'c', 'd'):
+        answer3 = str(input('Choose your next step(a, b, c, d, e, f):\n---------------------------\n'
+                            '(a)Puzzle with Easy Difficulty\n(b)Puzzle with Medium Difficulty\n(c)Puzzle with Hard '
+                            'Difficulty\n(d)Puzzle with Very Hard Difficulty\n(e)Choose a Custom Difficulty'
+                            '\n(f)Pass\nEnter your choice: '))
+        if answer3 in ('a', 'b', 'c', 'd','e', 'f'):
             break
         print("invalid input.\n")
     if answer3 == 'a':
@@ -202,11 +204,17 @@ def generateBoard_custom():
         sudokugenerator_easy.generateBoard_easy()
     elif answer3 == 'b':
         print("===================================================================")
-        sudokugenerator_hard.generateBoard_hard()
+        sudokugenerator_medium.generateBoard_medium()
     elif answer3 == 'c':
         print("===================================================================")
-        generateBoard_custom()
+        sudokugenerator_hard.generateBoard_hard()
     elif answer3 == 'd':
+        print("===================================================================")
+        sudokugenerator_veryhard.generateBoard_veryhard()
+    elif answer3 == 'e':
+        print("===================================================================")
+        generateBoard_custom()
+    elif answer3 == 'f':
         return x
 
 

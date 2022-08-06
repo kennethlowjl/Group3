@@ -1,4 +1,6 @@
 import sudokugenerator_easy
+import sudokugenerator_medium
+import sudokugenerator_veryhard
 import sudokugenerator_custom
 import pickle
 import time
@@ -122,10 +124,10 @@ def generateBoard_hard():
             infile_1.close
 
             # print(f"Original difficulty: {backtrack_stat}")
-            backtrack_stat_final = int(backtrack_stat*1.5)
+            # backtrack_stat_final = int(backtrack_stat*1.5)
 
             # print(f"Run = {num_of_backtrack_1}")
-            if num_of_backtrack_1 < backtrack_stat_final or num_of_backtrack_1 > int(backtrack_stat*2):                   #I WANT MORE DIFFICULT FUNCTION
+            if num_of_backtrack_1 < 2001 or num_of_backtrack_1 > 4001:      #I WANT DIFFICULT PUZZLE
                 num_of_backtrack_1 = 0
                 continue
             else:
@@ -157,22 +159,10 @@ def generateBoard_hard():
 
                 print("---------------------------\n")
                 print("=====================================================================")
-                print("GENERATING A HARDER PUZZLE")
+                print("GENERATING A HARD PUZZLE")
                 print(f"Number of Blanks: {empties}")
                 print(f"Original Difficulty: {backtrack_stat}")
                 print(f"New Difficulty: {num_of_backtrack_1}")
-                if num_of_backtrack_1 > 4001:
-                    print(
-                        f"The Difficulty Level of {num_of_backtrack_1} is very High. Suggest decreasing the difficulty. ")
-                elif num_of_backtrack_1 > 2001:
-                    print(
-                        f"The Difficulty Level of {num_of_backtrack_1} is slightly High. Suggest decreasing the difficulty. ")
-                elif num_of_backtrack_1 > 301:
-                    print(
-                        f"The Difficulty Level of {num_of_backtrack_1} is slightly Low. Suggest increasing the difficulty. ")
-                else:
-                    print(
-                        f"The Difficulty Level of {num_of_backtrack_1} is very Low. Suggest increasing the difficulty. ")
                 print("=====================================================================\n")
 
                 outfile_1 = open('backtrack_num.txt', 'wb')
@@ -180,16 +170,17 @@ def generateBoard_hard():
                 outfile_1.close()
                 break
         else:
-            print("===================================================================================================")
-            print("Puzzle could not be found at a harder difficulty setting. Suggest choosing another difficulty setting.")
-            print("===================================================================================================\n")
+            print("====================================================================================================")
+            print("Puzzle could not be found at a HARD setting. Suggest choosing another difficulty setting.")
+            print("====================================================================================================\n")
             break
 
     while True:
-        answer3 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
-                            '(a)Easier set of Puzzle\n(b)Harder set of Puzzle\n(c)Choose a Custom Difficulty'
-                            '\n(d)Pass\nEnter your choice: '))
-        if answer3 in ('a', 'b', 'c', 'd'):
+        answer3 = str(input('Choose your next step(a, b, c, d, e, f):\n---------------------------\n'
+                            '(a)Puzzle with Easy Difficulty\n(b)Puzzle with Medium Difficulty\n(c)Puzzle with Hard '
+                            'Difficulty\n(d)Puzzle with Very Hard Difficulty\n(e)Choose a Custom Difficulty'
+                            '\n(f)Pass\nEnter your choice: '))
+        if answer3 in ('a', 'b', 'c', 'd','e', 'f'):
             break
         print("invalid input.\n")
     if answer3 == 'a':
@@ -197,9 +188,15 @@ def generateBoard_hard():
         sudokugenerator_easy.generateBoard_easy()
     elif answer3 == 'b':
         print("===================================================================")
-        generateBoard_hard()
+        sudokugenerator_medium.generateBoard_medium()
     elif answer3 == 'c':
         print("===================================================================")
-        sudokugenerator_custom.generateBoard_custom()
+        generateBoard_hard()
     elif answer3 == 'd':
+        print("===================================================================")
+        sudokugenerator_veryhard.generateBoard_veryhard()
+    elif answer3 == 'e':
+        print("===================================================================")
+        sudokugenerator_custom.generateBoard_custom()
+    elif answer3 == 'f':
         return x
