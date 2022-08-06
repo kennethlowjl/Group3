@@ -74,7 +74,16 @@ def generateBoard_custom():
     infile_1 = open('backtrack_num.txt', 'rb')
     backtrack_stat = int(pickle.load(infile_1))
     infile_1.close
-    backtrack_custom = int(input(f"Choose your difficulty level (Original Difficulty:{backtrack_stat}): "))
+
+    while True:
+        try:
+            backtrack_custom = int(input(f"Choose your difficulty level (Original Difficulty:{backtrack_stat}): "))
+
+        except ValueError:
+            print("Invalid input")
+            continue
+        else:
+            break
     print("Generating..")
 
     timeout = time.time() + 8
