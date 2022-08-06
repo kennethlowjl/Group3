@@ -69,7 +69,7 @@ def generateBoard_easy():
 
     global num_of_backtrack_1
 
-    timeout = time.time() + 5
+    timeout = time.time() + 8
     print("Generating..\n")
 
     while True:

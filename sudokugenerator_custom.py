@@ -75,7 +75,7 @@ def generateBoard_custom():
     backtrack_custom = int(input(f"Choose your difficulty level (Original Difficulty:{backtrack_stat}): "))
     print("Generating..")
 
-    timeout = time.time() + 5
+    timeout = time.time() + 8
 
     while True:
         if time.time() < timeout:
