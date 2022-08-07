@@ -121,10 +121,10 @@ def generateBoard_easy():
             backtrack_stat = int(pickle.load(infile_1))
             infile_1.close
             # print(f"Original difficulty: {backtrack_stat}")
-            backtrack_stat_final = int(backtrack_stat*0.75)
+            backtrack_stat_final = int(backtrack_stat*0.80)
 
             # print(f"Run = {num_of_backtrack_1}")
-            if num_of_backtrack_1 > backtrack_stat_final or num_of_backtrack_1 < int(backtrack_stat*0.5):                   #I WANT EASIER FUNCTION
+            if num_of_backtrack_1 > backtrack_stat_final or num_of_backtrack_1 < int(backtrack_stat*0.75):                   #I WANT EASIER FUNCTION
                 num_of_backtrack_1 = 0
                 continue
             else:
@@ -185,7 +185,7 @@ def generateBoard_easy():
             break
 
     while True:
-        answer3 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
+        answer3 = str(input('Choose your next step(a, b, c, d):\n---------------------------\n'
                             '(a)Easier set of Puzzle\n(b)Harder set of Puzzle\n(c)Choose a Custom Difficulty'
                             '\n(d)Pass\nEnter your choice: '))
         if answer3 in ('a', 'b', 'c', 'd'):

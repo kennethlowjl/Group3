@@ -72,7 +72,16 @@ def generateBoard_custom():
     infile_1 = open('backtrack_num.txt', 'rb')
     backtrack_stat = int(pickle.load(infile_1))
     infile_1.close
-    backtrack_custom = int(input(f"Choose your difficulty level (Original Difficulty:{backtrack_stat}): "))
+
+    while True:
+        try:
+            backtrack_custom = int(input(f"Choose your difficulty level (Original Difficulty:{backtrack_stat}): "))
+
+        except ValueError:
+            print("Invalid input")
+            continue
+        else:
+            break
     print("Generating..")
 
     timeout = time.time() + 8
@@ -127,8 +136,8 @@ def generateBoard_custom():
             infile_1.close
             # print(f"Original difficulty: {backtrack_custom}")
             # print(f"Run = {num_of_backtrack_1}")
-            if num_of_backtrack_1 > int(backtrack_custom * 1.25) or num_of_backtrack_1 < int(backtrack_custom*0.75):
-                # if num_of_backtrack_1 < backtrack_custom / 2:                   #I WANT CUSTOM TO BE 50% APART
+            if num_of_backtrack_1 > int(backtrack_custom * 1.2) or num_of_backtrack_1 < int(backtrack_custom*0.8):
+                # if num_of_backtrack_1 < backtrack_custom / 2:                   #I WANT CUSTOM TO BE 40% APART
                 num_of_backtrack_1 = 0
                 continue
             else:
@@ -191,7 +200,7 @@ def generateBoard_custom():
 
 
     while True:
-        answer3 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
+        answer3 = str(input('Choose your next step(a, b, c, d):\n---------------------------\n'
                             '(a)Easier set of Puzzle\n(b)Harder set of Puzzle\n(c)Choose a Custom Difficulty'
                             '\n(d)Pass\nEnter your choice: '))
         if answer3 in ('a', 'b', 'c', 'd'):

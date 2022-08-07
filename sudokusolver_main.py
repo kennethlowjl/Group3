@@ -130,7 +130,7 @@ if __name__ == '__main__':
         print("===================================================================\n")
 
         while True:
-            answer2 = str(input('Choose your next step(a, b, c, d, e):\n---------------------------\n'
+            answer2 = str(input('Choose your next step(a, b, c, d):\n---------------------------\n'
                                 '(a)Easier Set of Puzzle\n(b)Harder Set of Puzzle\n(c)Choose a Custom Difficulty'
                                 '\n(d)Pass\nEnter your choice: '))
             if answer2 in ('a', 'b', 'c', 'd'):
