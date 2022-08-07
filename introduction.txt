@@ -9,7 +9,7 @@ The Solver will then feed the data into the Generator to produce a different set
 
 The Difficulty Recommendations are as follows:
 EASY: 1 - 300
-MEDIUM: 300 - 2000
-HARD: 2000 - 4000
+MEDIUM: 301 - 2000
+HARD: 2001 - 4000
 VERY HARD: >4000
 ================================================================================================
