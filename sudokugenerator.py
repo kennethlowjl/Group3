@@ -10,11 +10,11 @@ def generateBoard():
             empties = int(input("Firstly, choose the number of blanks from 1 - 58: "))
 
         except ValueError:
-            print("Invalid input")
+            print("Invalid input\n")
             continue
         if empties in range(1, 59):
             break
-        print("Invalid input")
+        print("Invalid input\n")
     if empties == range(1,59):
         return empties
 
