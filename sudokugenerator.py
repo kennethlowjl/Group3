@@ -6,7 +6,7 @@ def generateBoard():
     empties = 0
     while True:
         try:
-            print("Difficulty Level for Number of Blanks:\nVery Easy: 1 - 34\nEasy:35 - 45\nMedium: 46 - 49\nDifficult: 50 - 53\nEvil: 54 - 58")
+            print("Difficulty Level for Number of Blanks:\nVery Easy: 1 - 34\nEasy: 35 - 45\nMedium: 46 - 49\nDifficult: 50 - 53\nEvil: 54 - 58")
             empties = int(input("Firstly, choose the number of blanks from 1 - 58: "))
 
         except ValueError:
